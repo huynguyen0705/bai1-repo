@@ -1,0 +1,129 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class QuanLyHoDan {
+
+    public static void main(String[] args) {
+        
+        Scanner sc = new Scanner(System.in);
+        ArrayList<HoDan> danhSachHoDan = new ArrayList<>();
+        
+        System.out.print("Nhap so ho dan: ");
+        int soHoDan = sc.nextInt();
+        
+        for (int i = 0; i < soHoDan; i++) {
+            System.out.println("Nhap thong tin cho ho dan thu " + (i+1));
+            HoDan hoDan = new HoDan();
+            
+            System.out.print("Nhap so nha: ");
+            int soNha = sc.nextInt();
+            hoDan.setSoNha(soNha);
+            
+            System.out.print("Nhap so thanh vien: ");
+            int soThanhVien = sc.nextInt();
+            sc.nextLine();
+            
+            for (int j = 0; j < soThanhVien; j++) {
+                System.out.println("Nhap thong tin cho thanh vien thu " + (j+1));
+                NguoiThanhVien thanhVien = new NguoiThanhVien();
+                
+                System.out.print("Nhap ho ten: ");
+                String hoTen = sc.nextLine();
+                thanhVien.setHoTen(hoTen);
+                
+                System.out.print("Nhap tuoi: ");
+                int tuoi = sc.nextInt();
+                thanhVien.setTuoi(tuoi);
+                sc.nextLine();
+                
+                System.out.print("Nhap nam sinh: ");
+                int namSinh = sc.nextInt();
+                thanhVien.setNamSinh(namSinh);
+                sc.nextLine();
+                
+                System.out.print("Nhap nghe nghiep: ");
+                String ngheNghiep = sc.nextLine();
+                thanhVien.setNgheNghiep(ngheNghiep);
+                
+                hoDan.themNguoiThanhVien(thanhVien);
+            }
+            
+            danhSachHoDan.add(hoDan);
+        }
+        
+        // In ra danh sach ho dan va thanh vien
+        for (HoDan hoDan : danhSachHoDan) {
+            System.out.println("Ho dan so nha " + hoDan.getSoNha() + " gom cac thanh vien sau:");
+            for (NguoiThanhVien thanhVien : hoDan.getDanhSachThanhVien()) {
+                System.out.println(thanhVien);
+            }
+        }
+        
+        sc.close();
+    }
+
+}
+
+class HoDan {
+    private int soNha;
+    private ArrayList<NguoiThanhVien> danhSachThanhVien = new ArrayList<>();
+    
+    public int getSoNha() {
+        return soNha;
+    }
+    
+    public void setSoNha(int soNha) {
+        this.soNha = soNha;
+    }
+    
+    public ArrayList<NguoiThanhVien> getDanhSachThanhVien() {
+        return danhSachThanhVien;
+    }
+    
+    public void themNguoiThanhVien(NguoiThanhVien thanhVien) {
+        danhSachThanhVien.add(thanhVien);
+    }
+}
+
+class NguoiThanhVien {
+private String hoTen;
+private int tuoi;
+private int namSinh;
+private String ngheNghiep;
+public String getHoTen() {
+    return hoTen;
+}
+
+public void setHoTen(String hoTen) {
+    this.hoTen = hoTen;
+}
+
+public int getTuoi() {
+    return tuoi;
+}
+
+public void setTuoi(int tuoi) {
+    this.tuoi = tuoi;
+}
+
+public int getNamSinh() {
+    return namSinh;
+}
+
+public void setNamSinh(int namSinh) {
+    this.namSinh = namSinh;
+}
+
+public String getNgheNghiep() {
+    return ngheNghiep;
+}
+
+public void setNgheNghiep(String ngheNghiep) {
+    this.ngheNghiep = ngheNghiep;
+}
+
+@Override
+public String toString() {
+    return hoTen + " (tuoi " + tuoi + ", nam sinh " + namSinh + ", nghe nghiep " + ngheNghiep + ")";
+}
+
